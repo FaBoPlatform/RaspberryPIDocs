@@ -49,6 +49,7 @@ def arduino_map(x, in_min, in_max, out_min, out_max):
 # 初期化
 spi = spidev.SpiDev()
 spi.open(0,0)
+spi.max_speed_hz = 5000
 
 try:
 	while True:
