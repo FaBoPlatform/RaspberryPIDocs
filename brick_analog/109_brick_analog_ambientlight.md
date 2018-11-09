@@ -67,6 +67,7 @@ LED = GPIO.PWM(LEDPIN, 100)
 LED.start(0)
 spi = spidev.SpiDev()
 spi.open(0,0)
+spi.max_speed_hz = 5000
 
 try:
 	while True:
