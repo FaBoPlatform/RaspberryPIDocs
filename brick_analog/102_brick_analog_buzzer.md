@@ -2,8 +2,7 @@
 
 RaspberryPIにはRersion1.0.9から対応しています。
 
-
-<center>![](/img/100_analog/product/102_v10.jpeg)
+![](/img/100_analog/product/102_v10.jpeg)
 <!--COLORME-->
 
 ※写真は、Rev 1.0.10のものです。
@@ -23,6 +22,7 @@ GPIO12 に接続します。
 |◯|◯|◯|
 
 ## Schematic
+
 ![](/img/100_analog/schematic/102_buzzer_V10.png)
 
 ## Sample Code
@@ -50,15 +50,15 @@ pig.set_mode(12, pigpio.ALT0)
 
 counter = 0
 while (counter < 3):
-pig.hardware_PWM(12, 261, 400)
-time.sleep(1)
-pig.hardware_PWM(12, 293 ,400)
-time.sleep(1)
-pig.hardware_PWM(12, 329, 400)
-time.sleep(1)
-counter = counter + 1
-pig.hardware_PWM(12, 50, 0)
-time.sleep(1)
+    pig.hardware_PWM(12, 261, 400)
+    time.sleep(1)
+    pig.hardware_PWM(12, 293 ,400)
+    time.sleep(1)
+    pig.hardware_PWM(12, 329, 400)
+    time.sleep(1)
+    counter = counter + 1
+    pig.hardware_PWM(12, 50, 0)
+    time.sleep(1)
 
 pig.hardware_PWM(12, 50, 0)
 pig.stop()
@@ -75,6 +75,7 @@ $python hardwarepwm.py
 
 ## Parts
 - 圧電ブザー
+
 TDK PS1740P02E データシート
 https://product.tdk.com/info/ja/catalog/datasheets/piezoelectronic_buzzer_ps_ja.pdf
 
