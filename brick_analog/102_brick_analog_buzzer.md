@@ -1,6 +1,6 @@
-# #102 Buzzer Brick（ラズパイ対応版)
+# #102 Buzzer Brick
 
-RaspberryPIにはRersion1.0.9から対応しています。
+RaspberryPIはRersion1.0.9から対応しています。
 
 ![](/img/100_analog/product/102_v10.jpeg)
 <!--COLORME-->
@@ -23,7 +23,7 @@ GPIO12 に接続します。
 
 ## Schematic
 
-![](/img/100_analog/schematic/102_buzzer_V10.png)
+![](/img/100_analog/schematic/102_buzzer_v10.png)
 
 ## Sample Code
 
