@@ -1,6 +1,6 @@
 # #102 Buzzer Brick
 
-RaspberryPIはRersion1.0.9から対応しています。
+RaspberryPIはRev 1.0.9から対応しています。
 
 ![](/img/100_analog/product/102_v10.jpeg)
 <!--COLORME-->
@@ -15,6 +15,8 @@ RaspberryPIはRersion1.0.9から対応しています。
 GPIO12 に接続します。
 
 ![](/img/100_analog/connect/102_buzzer_connect.jpeg)
+
+※写真は、ラズパイモーターシールドとの接続の場合です。
 
 ## Support
 |Arduino|RaspberryPi|IchigoJam|
@@ -34,7 +36,7 @@ PWMを発生させて圧電ブザーを鳴らします。どのGPIOでも鳴ら�
 
 GPIOピン設定確認
 
-使用するピンは３２、チップであるBCMピン１２になります。
+FaBoのシールドのピンGPIO12（ピンはラズパイ３２、チップであるBCMピン １２）になります。
 
 $gpio readall
 
