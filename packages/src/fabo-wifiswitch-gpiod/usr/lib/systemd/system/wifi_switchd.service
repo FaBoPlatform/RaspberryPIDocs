@@ -1,0 +1,16 @@
+[Unit]
+Description= Listens GPIO events of Fabo wifi switch and execute wifi_switch
+After=network.target network-online.target
+
+[Service]
+Type=forking
+ExecStart=/etc/init.d/wifi_switchd start
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=control-group
+Restart=on-failure
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
+Alias=wifi_switchd.service

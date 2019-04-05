@@ -1,0 +1,8 @@
+Source: fabo-wifiswitch
+Package: fabo-wifiswitch
+Version: 1.1.0
+Priority: optional
+Maintainer: Yoshiroh Takanashi <takanashi@gclue.jp>
+Architecture: armhf
+Depends: hostapd, dnsmasq
+Description: WiFi mode switcher for the Raspberry Pi3 wlan0
