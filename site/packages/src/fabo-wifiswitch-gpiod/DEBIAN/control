@@ -1,0 +1,9 @@
+Source: fabo-wifiswitch-gpiod
+Package: fabo-wifiswitch-gpiod
+Version: 1.0.1
+Priority: optional
+Maintainer: Yoshiroh Takanashi <takanashi@gclue.jp>
+Architecture: armhf
+Depends: fabo-wifiswitch (>=1.0.1), python-rpi.gpio, python-pip
+Description: Fabo WiFi Switch GPIO Daemon
+ Listens GPIO events of Fabo wifi switch and execute wifi_switch

@@ -1,0 +1,2800 @@
+
+
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.5">
+    
+    
+      
+        <title>207 Temperature I2C Brick - FaBo RaspberryPi Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df84b5fe.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#207-temperature-i2c-brick" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="">
+    <a href="../.." title="FaBo RaspberryPi Docs" class="md-header-nav__button md-logo" aria-label="FaBo RaspberryPi Docs">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            FaBo RaspberryPi Docs
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              207 Temperature I2C Brick
+            
+          </span>
+        </div>
+      
+    </div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FaBo RaspberryPi Docs" class="md-nav__button md-logo" aria-label="FaBo RaspberryPi Docs">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    FaBo RaspberryPi Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="FaBo RaspberryPi Docs" class="md-nav__link">
+      FaBo RaspberryPi Docs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      01.dev
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="01.dev" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        01.dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/" title="RaspberryPI" class="md-nav__link">
+      RaspberryPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Pi
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Pi" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Pi
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/" title="Raspberry Pi3用 FaBoパッケージ" class="md-nav__link">
+      Raspberry Pi3用 FaBoパッケージ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/502_shield_outin_raspberrypi/" title="502 OUT/IN Shield for Raspberry Pi" class="md-nav__link">
+      502 OUT/IN Shield for Raspberry Pi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/506_shield_outin_raspberrypizero/" title="506 OUT/IN Shield for Raspberry Pi Zero" class="md-nav__link">
+      506 OUT/IN Shield for Raspberry Pi Zero
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/arduino/" title="Arduino 1.8.x系のインストール" class="md-nav__link">
+      Arduino 1.8.x系のインストール
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/camera/" title="カメラ" class="md-nav__link">
+      カメラ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/capture/" title="画面キャプチャー" class="md-nav__link">
+      画面キャプチャー
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/chibi/" title="ちびファイ MZK-RP150NA" class="md-nav__link">
+      ちびファイ MZK-RP150NA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/chibi2/" title="ちびファイ2 MZK-UE150N" class="md-nav__link">
+      ちびファイ2 MZK-UE150N
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/clone/" title="SDカードのクローンを作成" class="md-nav__link">
+      SDカードのクローンを作成
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/display/" title="Display" class="md-nav__link">
+      Display
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/elecom/" title="ちびファイ MZK-RP150NA" class="md-nav__link">
+      ちびファイ MZK-RP150NA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/etc/" title="その他" class="md-nav__link">
+      その他
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/gpio/" title="GPIOを有効にする" class="md-nav__link">
+      GPIOを有効にする
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/hostapd_sw1/" title="hostapdとWifiClientの切り替え" class="md-nav__link">
+      hostapdとWifiClientの切り替え
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/hostapd_sw2/" title="Hostapd sw2" class="md-nav__link">
+      Hostapd sw2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/hostdap/" title="Hostdap" class="md-nav__link">
+      Hostdap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/i2c/" title="I2c" class="md-nav__link">
+      I2c
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/install/" title="RASPBIANのインストール" class="md-nav__link">
+      RASPBIANのインストール
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/install_library/" title="FaBo Pythonライブラリのインストール" class="md-nav__link">
+      FaBo Pythonライブラリのインストール
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/install_lite/" title="RASPBIANのインストール" class="md-nav__link">
+      RASPBIANのインストール
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/install_pixel/" title="RASPBIANのインストール" class="md-nav__link">
+      RASPBIANのインストール
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/jupyter/" title="Jupyter" class="md-nav__link">
+      Jupyter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/jupyter001/" title="Jupyterの基本操作" class="md-nav__link">
+      Jupyterの基本操作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/jupyter_cmd/" title="Jupyterのコマンド実行" class="md-nav__link">
+      Jupyterのコマンド実行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/jupyter_helloworld/" title="Jupyterの基本操作" class="md-nav__link">
+      Jupyterの基本操作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/jupyter_print/" title="Jupyterの標準出力" class="md-nav__link">
+      Jupyterの標準出力
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/jupyter_service/" title="JupyterのService化" class="md-nav__link">
+      JupyterのService化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/keyboard/" title="KEYBOARDの設定" class="md-nav__link">
+      KEYBOARDの設定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/login/" title="RaspberryPIへのログイン" class="md-nav__link">
+      RaspberryPIへのログイン
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/lte/" title="L-02Cを利用したLTE接続方法" class="md-nav__link">
+      L-02Cを利用したLTE接続方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/pip/" title="PIP" class="md-nav__link">
+      PIP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/power/" title="電力" class="md-nav__link">
+      電力
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/pwm/" title="RaspberryPIのPWM対応表" class="md-nav__link">
+      RaspberryPIのPWM対応表
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/rappi/" title="RaspberryPI" class="md-nav__link">
+      RaspberryPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/router/" title="Wifi Routerの設定" class="md-nav__link">
+      Wifi Routerの設定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/search/" title="特定ワードを全検索" class="md-nav__link">
+      特定ワードを全検索
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/serial/" title="Serial" class="md-nav__link">
+      Serial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/spi/" title="SPIの設定" class="md-nav__link">
+      SPIの設定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/ssh/" title="SSHの設定" class="md-nav__link">
+      SSHの設定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/stretch_i2c_kernel/" title="I2C Kernel/smbus修正" class="md-nav__link">
+      I2C Kernel/smbus修正
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/update/" title="PackageのUpdate" class="md-nav__link">
+      PackageのUpdate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/usb/" title="PIとiPhoneでネットワーク構築" class="md-nav__link">
+      PIとiPhoneでネットワーク構築
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/usbwifi_lite/" title="PIとWifiSpotでネットワーク構築" class="md-nav__link">
+      PIとWifiSpotでネットワーク構築
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/usbwifi_pixel/" title="ネットワーク設定(Pixel)" class="md-nav__link">
+      ネットワーク設定(Pixel)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/uv4l/" title="UV4L" class="md-nav__link">
+      UV4L
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/wifi_lite/" title="PIとWifiSpotでネットワーク構築" class="md-nav__link">
+      PIとWifiSpotでネットワーク構築
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../01.dev/pi/wifi_pixel/" title="ネットワーク設定(Pixel)" class="md-nav__link">
+      ネットワーク設定(Pixel)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      02.Analog Brick
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="02.Analog Brick" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        02.Analog Brick
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/" title="FaBo Analog Bricks" class="md-nav__link">
+      FaBo Analog Bricks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/101_brick_analog_led/" title="101 LED Brick" class="md-nav__link">
+      101 LED Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/102_brick_analog_buzzer/" title="102 Buzzer Brick" class="md-nav__link">
+      102 Buzzer Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/103_brick_analog_button/" title="103 Button Brick" class="md-nav__link">
+      103 Button Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/104_brick_analog_angle/" title="104 Angle Brick" class="md-nav__link">
+      104 Angle Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/105_brick_analog_vibrator/" title="105 Vibrator Brick(非対応)" class="md-nav__link">
+      105 Vibrator Brick(非対応)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/106_brick_analog_touch/" title="106 Touch Brick" class="md-nav__link">
+      106 Touch Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/107_brick_analog_limitswitch/" title="107 LimitSwitch Brick" class="md-nav__link">
+      107 LimitSwitch Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/108_brick_analog_temperature/" title="108 Temperature Brick" class="md-nav__link">
+      108 Temperature Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/109_brick_analog_ambientlight/" title="109 Light Brick" class="md-nav__link">
+      109 Light Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/110_brick_analog_tilt/" title="110 Tilt Brick" class="md-nav__link">
+      110 Tilt Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/111_brick_analog_mic/" title="111 Microphone Brick" class="md-nav__link">
+      111 Microphone Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/112_brick_analog_ir_led/" title="112 IR LED Brick" class="md-nav__link">
+      112 IR LED Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/113_brick_analog_ir_receive/" title="113 IR Receiver Brick" class="md-nav__link">
+      113 IR Receiver Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/114_brick_analog_uv/" title="114 UV Brick" class="md-nav__link">
+      114 UV Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/115_brick_analog_humidity/" title="115 Humidity Brick(非対応)" class="md-nav__link">
+      115 Humidity Brick(非対応)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/116_brick_analog_distance/" title="116 Distance Brick" class="md-nav__link">
+      116 Distance Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../02.Analog%20Brick/117_brick_analog_slideswitch/" title="117 Switch Brick" class="md-nav__link">
+      117 Switch Brick
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      03.I2C Brick
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="03.I2C Brick" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        03.I2C Brick
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="FaBo I2C Bricks" class="md-nav__link">
+      FaBo I2C Bricks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../201_brick_i2c_3axis/" title="201 3Axis I2C Brick" class="md-nav__link">
+      201 3Axis I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../202_brick_i2c_9axis/" title="202 9Axis I2C Brick" class="md-nav__link">
+      202 9Axis I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../203_brick_i2c_color/" title="203 Color I2C Brick" class="md-nav__link">
+      203 Color I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../204_brick_i2c_barometer/" title="204 Barometer I2C Brick" class="md-nav__link">
+      204 Barometer I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../205_brick_i2c_proximity/" title="205 Proximity I2C Brick" class="md-nav__link">
+      205 Proximity I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../206_brick_i2c_uv/" title="206 UV Index I2C Brick" class="md-nav__link">
+      206 UV Index I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        207 Temperature I2C Brick
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="207 Temperature I2C Brick" class="md-nav__link md-nav__link--active">
+      207 Temperature I2C Brick
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    接続
+  </a>
+  
+    <nav class="md-nav" aria-label="接続">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arduino" class="md-nav__link">
+    Arduino
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raspberry-pi" class="md-nav__link">
+    Raspberry Pi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adt7410-datasheet" class="md-nav__link">
+    ADT7410 Datasheet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#register" class="md-nav__link">
+    Register
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    回路図
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#library" class="md-nav__link">
+    Library
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-code" class="md-nav__link">
+    Sample Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parts" class="md-nav__link">
+    構成Parts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    GitHub
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../208_brick_i2c_humidity/" title="208 Humidity I2C Brick" class="md-nav__link">
+      208 Humidity I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../209_brick_i2c_ktemp/" title="209 Ktemp I2C Brick" class="md-nav__link">
+      209 Ktemp I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../210_brick_i2c_gpio/" title="210 GPIO I2C Brick" class="md-nav__link">
+      210 GPIO I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../211_brick_i2c_7seg/" title="211 7Segment LED I2C Brick" class="md-nav__link">
+      211 7Segment LED I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../212_brick_i2c_lcd/" title="212 LCD I2C Brick" class="md-nav__link">
+      212 LCD I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../213_brick_i2c_lcd_mini/" title="213 LCD mini I2C Brick (非対応)" class="md-nav__link">
+      213 LCD mini I2C Brick (非対応)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../214_brick_i2c_oled/" title="214 OLED I2C Brick" class="md-nav__link">
+      214 OLED I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../215_brick_i2c_rtc/" title="215 RTC I2C Brick" class="md-nav__link">
+      215 RTC I2C Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../217_brick_i2c_ambientlight/" title="217 Ambient Light I2C Brick" class="md-nav__link">
+      217 Ambient Light I2C Brick
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      04. Serial Brick
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="04. Serial Brick" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        04. Serial Brick
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/" title="FaBo Serial Bricks" class="md-nav__link">
+      FaBo Serial Bricks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/301_brick_serial_ble/" title="301 BLE SiliconLabs Serial Brick" class="md-nav__link">
+      301 BLE SiliconLabs Serial Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/302_brick_serial_bluetooth/" title="302 Bluetooth Serial Brick" class="md-nav__link">
+      302 Bluetooth Serial Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/303_brick_serial_phonejack/" title="303 PhoneJack Serial Brick" class="md-nav__link">
+      303 PhoneJack Serial Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/304_brick_serial_usb/" title="304 USB Serial Brick" class="md-nav__link">
+      304 USB Serial Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/305_brick_serial_wifi/" title="305 Wifi Serial Brick" class="md-nav__link">
+      305 Wifi Serial Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/306_brick_serial_zigbee/" title="306 ZigBee Serial Brick" class="md-nav__link">
+      306 ZigBee Serial Brick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../04.%20Serial%20Brick/307_brick_serial_nordic/" title="307 BLE Nordic Serial Brick" class="md-nav__link">
+      307 BLE Nordic Serial Brick
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      05. Color Brick
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="05. Color Brick" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        05. Color Brick
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../05.%20Color%20Brick/401_brick_3pin_led/" title="401 ColorLED One" class="md-nav__link">
+      401 ColorLED One
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../05.%20Color%20Brick/402_brick_3pin_led_circle/" title="402 ColorLED Ring" class="md-nav__link">
+      402 ColorLED Ring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../05.%20Color%20Brick/403_brick_3pin_led_bar/" title="403 ColorLED Bar" class="md-nav__link">
+      403 ColorLED Bar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../05.%20Color%20Brick/404_brick_3pin_led_matrix/" title="404 ColorLED Matrix" class="md-nav__link">
+      404 ColorLED Matrix
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Bluetooth
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Bluetooth" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Bluetooth
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Bluetooth/raspi2bluetooth/" title="Raspberry piとBluetooth接続をして通信をする" class="md-nav__link">
+      Raspberry piとBluetooth接続をして通信をする
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Camera
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Camera" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Camera
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../camera/picamera/" title="カメラ" class="md-nav__link">
+      カメラ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../camera/streaming/" title="mjpg-streamerを使用したカメラ制御" class="md-nav__link">
+      mjpg-streamerを使用したカメラ制御
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Case
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Case" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Case
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../case/1101_case_arduino_uno/" title="1101 Arduino UNOケース" class="md-nav__link">
+      1101 Arduino UNOケース
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../case/1102_case_arduino_mega/" title="1102 Arduino MEGAケース" class="md-nav__link">
+      1102 Arduino MEGAケース
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../case/1103_case_arduino_yun/" title="1103 Arduino YUNケース" class="md-nav__link">
+      1103 Arduino YUNケース
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Data
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/grafana/" title="Grafana" class="md-nav__link">
+      Grafana
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/influxapi/" title="InfluxAPI" class="md-nav__link">
+      InfluxAPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/influxdb/" title="Influxdb" class="md-nav__link">
+      Influxdb
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Fabo
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Fabo" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Fabo
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../fabo/" title="FaBo" class="md-nav__link">
+      FaBo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../fabo/003_starterkit_raspberrypi/" title="003 FaBo Starter Kit for Raspberry PI" class="md-nav__link">
+      003 FaBo Starter Kit for Raspberry PI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Img
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Img" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Img
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-1" type="checkbox" id="nav-12-1">
+    
+    <label class="md-nav__link" for="nav-12-1">
+      Dev
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Dev" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Dev
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-1-1" type="checkbox" id="nav-12-1-1">
+    
+    <label class="md-nav__link" for="nav-12-1-1">
+      Arduino
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Arduino" data-md-level="3">
+      <label class="md-nav__title" for="nav-12-1-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Arduino
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../img/dev/arduino/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-1-2" type="checkbox" id="nav-12-1-2">
+    
+    <label class="md-nav__link" for="nav-12-1-2">
+      Edison
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Edison" data-md-level="3">
+      <label class="md-nav__title" for="nav-12-1-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Edison
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../img/dev/edison/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      Kit kaden
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Kit kaden" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Kit kaden
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kit_kaden/1501_kit_propeller/" title="1501 Propeller Kit" class="md-nav__link">
+      1501 Propeller Kit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kit_kaden/1502_kit_matrix_plate/" title="1502 Matrix Plate Kit" class="md-nav__link">
+      1502 Matrix Plate Kit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kit_kaden/1503_kit_smartlight/" title="1503 SmartLight Kit" class="md-nav__link">
+      1503 SmartLight Kit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kit_kaden/1504_kit_remotecontroller/" title="1504 RemoteController Kit" class="md-nav__link">
+      1504 RemoteController Kit
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+    
+    <label class="md-nav__link" for="nav-14">
+      Kit robot
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Kit robot" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Kit robot
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../kit_robot/1201_kit_robotcar/" title="1201 Robot Car Kit for Arduino" class="md-nav__link">
+      1201 Robot Car Kit for Arduino
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      Measure rot
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Measure rot" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Measure rot
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../measure_rot/measure/" title="磁力センサとフォトリフレクタによる回転数の取得" class="md-nav__link">
+      磁力センサとフォトリフレクタによる回転数の取得
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16" type="checkbox" id="nav-16">
+    
+    <label class="md-nav__link" for="nav-16">
+      Motor
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Motor" data-md-level="1">
+      <label class="md-nav__title" for="nav-16">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Motor
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../motor/601_motor/" title="601 Motor Shield for Arduino" class="md-nav__link">
+      601 Motor Shield for Arduino
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../motor/602_stmotor/" title="602 Stepping Motor Shield for Arduino" class="md-nav__link">
+      602 Stepping Motor Shield for Arduino
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../motor/motor/" title="601 Motor Shield for Arduino" class="md-nav__link">
+      601 Motor Shield for Arduino
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../motor/motor_DRV8835/" title="モータードライバーDRV8835のサンプルコード" class="md-nav__link">
+      モータードライバーDRV8835のサンプルコード
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../motor/motor_TA7291P/" title="モータードライバーTA7291Pのサンプルコード" class="md-nav__link">
+      モータードライバーTA7291Pのサンプルコード
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-17" type="checkbox" id="nav-17">
+    
+    <label class="md-nav__link" for="nav-17">
+      Openrtm
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Openrtm" data-md-level="1">
+      <label class="md-nav__title" for="nav-17">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Openrtm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../openrtm/dev/" title="OpenRTMをJupyerから操作する" class="md-nav__link">
+      OpenRTMをJupyerから操作する
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../openrtm/dev_jupyter/" title="OpenRTMをJupyerから操作する" class="md-nav__link">
+      OpenRTMをJupyerから操作する
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-18" type="checkbox" id="nav-18">
+    
+    <label class="md-nav__link" for="nav-18">
+      Outin
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Outin" data-md-level="1">
+      <label class="md-nav__title" for="nav-18">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Outin
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../outin/501_shield_outin_arduino/" title="501 OUT/IN Shield for Arduino" class="md-nav__link">
+      501 OUT/IN Shield for Arduino
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-19" type="checkbox" id="nav-19">
+    
+    <label class="md-nav__link" for="nav-19">
+      Packages
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Packages" data-md-level="1">
+      <label class="md-nav__title" for="nav-19">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Packages
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../packages/" title="Raspberry Pi3用 FaBoパッケージ" class="md-nav__link">
+      Raspberry Pi3用 FaBoパッケージ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../packages/fabo-wifiswitch-gpiod/" title="Raspberry Pi3用 Fabo WiFi Switch GPIO Daemon パッケージ" class="md-nav__link">
+      Raspberry Pi3用 Fabo WiFi Switch GPIO Daemon パッケージ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../packages/fabo-wifiswitch/" title="Raspberry Pi3用 Fabo WiFi Switch パッケージ" class="md-nav__link">
+      Raspberry Pi3用 Fabo WiFi Switch パッケージ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-20" type="checkbox" id="nav-20">
+    
+    <label class="md-nav__link" for="nav-20">
+      Servo
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Servo" data-md-level="1">
+      <label class="md-nav__title" for="nav-20">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Servo
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../servo/servo/" title="Servo" class="md-nav__link">
+      Servo
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-21" type="checkbox" id="nav-21">
+    
+    <label class="md-nav__link" for="nav-21">
+      Thirdparty
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Thirdparty" data-md-level="1">
+      <label class="md-nav__title" for="nav-21">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Thirdparty
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../thirdparty/lidarlite/" title="Lidar Lite v3をRaspberry piのI2Cで制御する" class="md-nav__link">
+      Lidar Lite v3をRaspberry piのI2Cで制御する
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    接続
+  </a>
+  
+    <nav class="md-nav" aria-label="接続">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arduino" class="md-nav__link">
+    Arduino
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raspberry-pi" class="md-nav__link">
+    Raspberry Pi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adt7410-datasheet" class="md-nav__link">
+    ADT7410 Datasheet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#register" class="md-nav__link">
+    Register
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    回路図
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#library" class="md-nav__link">
+    Library
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-code" class="md-nav__link">
+    Sample Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parts" class="md-nav__link">
+    構成Parts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    GitHub
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="207-temperature-i2c-brick">#207 Temperature I2C Brick</h1>
+<p><a href="../../img/200_i2c/product/207.jpg"></a>
+<!--COLORME--></p>
+<h2 id="overview">Overview</h2>
+<p>温度センサを使用したBrickです。
+I2Cでデータを取得できます。</p>
+<p>計測できる範囲は−55度〜150度です。</p>
+<h2 id="_1">接続</h2>
+<p>I2Cコネクタへ接続します。</p>
+<h3 id="arduino">Arduino</h3>
+<p><img alt="" src="../../img/200_i2c/connect/207_temperature_connect.jpg" /></p>
+<h3 id="raspberry-pi">Raspberry Pi</h3>
+<p><img alt="" src="../../img/200_i2c/connect/207_connect_with_rasppi.jpg" /></p>
+<h2 id="adt7410-datasheet">ADT7410 Datasheet</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.analog.com/media/en/technical-documentation/data-sheets/ADT7410.pdf">ADT7410 Datasheet</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="register">Register</h2>
+<table>
+<thead>
+<tr>
+<th>Slave Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x48</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">回路図</h2>
+<p><img alt="" src="../../img/200_i2c/schematic/207_temperature.png" /></p>
+<h2 id="library">Library</h2>
+<ul>
+<li>pipからインストール</li>
+</ul>
+<p> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre>1</pre></div></td><td class=code><div class=codehilite><pre><span></span><code>$ sudo pip install FaBoTemperature_ADT7410
+</code></pre></div></td></tr></table></p>
+<ul>
+<li><a href="https://github.com/FaBoPlatform/FaBoTemperature-ADT7410-Python">Library GitHub</a></li>
+<li><a href="http://fabo.io/doxygen/FaBoTemperature-ADT7410-Python/">Library Document</a></li>
+</ul>
+<h2 id="sample-code">Sample Code</h2>
+<p> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class=code><div class=codehilite><pre><span></span><code><span class=c1># coding: utf-8</span>
+
+<span class=kn>import</span> <span class=nn>FaBoTemperature_ADT7410</span>
+<span class=kn>import</span> <span class=nn>time</span>
+<span class=kn>import</span> <span class=nn>sys</span>
+
+<span class=n>adt7410</span> <span class=o>=</span> <span class=n>FaBoTemperature_ADT7410</span><span class=o>.</span><span class=n>ADT7410</span><span class=p>()</span>
+
+<span class=k>try</span><span class=p>:</span>
+    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+        <span class=n>t</span> <span class=o>=</span> <span class=n>adt7410</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
+        <span class=n>sys</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=s2>&quot;</span><span class=se>\r</span><span class=s2>Temp=</span><span class=si>%f</span><span class=s2>&quot;</span> <span class=o>%</span> <span class=n>t</span><span class=p>)</span>
+        <span class=n>sys</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>flush</span><span class=p>()</span>
+
+        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mf>0.5</span><span class=p>)</span>
+
+<span class=k>except</span> <span class=ne>KeyboardInterrupt</span><span class=p>:</span>
+    <span class=n>sys</span><span class=o>.</span><span class=n>exit</span><span class=p>()</span>
+</code></pre></div></td></tr></table></p>
+<h2 id="parts">構成Parts</h2>
+<ul>
+<li>Analog Devices ADT7410</li>
+</ul>
+<h2 id="github">GitHub</h2>
+<ul>
+<li>https://github.com/FaBoPlatform/FaBo/tree/master/207_temperature</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="">
+        
+          <a href="../206_brick_i2c_uv/" title="206 UV Index I2C Brick" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                206 UV Index I2C Brick
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../208_brick_i2c_humidity/" title="208 Humidity I2C Brick" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  次
+                </span>
+                208 Humidity I2C Brick
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.83fe6e3c.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7e1cb91c.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+    
+  </body>
+</html>

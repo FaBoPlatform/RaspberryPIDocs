@@ -1,0 +1,305 @@
+#!/usr/bin/python
+# coding: utf-8
+# /opt/fabo/bin/wifi_switch_gpiod
+# pip install futures
+#
+# コーディング規則
+# クラス名:UppercaseUppercaseUppercase
+# メソッド名:lowercaseUppercaseUppercase
+# 定数：UPPERCASE_UPPERCASE_UPPERCASE
+# 変数：lowercase_lowercase_lowercase
+
+import time
+from concurrent import futures
+import os
+import multiprocessing
+import RPi.GPIO as GPIO
+import thread
+import threading
+import logging
+from multiprocessing.managers import SyncManager
+
+# ログ設定
+logging.basicConfig(level=logging.DEBUG,
+                    format='[%(levelname)s] time:%(created).8f pid:%(process)d pn:%(processName)-10s tid:%(thread)d tn:%(threadName)-10s fn:%(funcName)-10s %(message)s',
+)
+
+# パルス安定待ち時間sec
+PULSE_WAIT_TIME=2.0
+
+
+class FaboGPIO():
+    '''
+    Fabo #605 Motor Shield Raspberry Pi上のスイッチとGPIOの対応定義
+    '''
+    #ジャンパピン
+    N_REST = 24
+    #スライドスイッチでモード選択
+    DHCP_PIN = 25
+    AP_PIN = 26
+#
+
+class PulseWorkThread(threading.Thread):
+    '''
+    パルスイベント処理クラス
+    パルスイベント処理中にGPIOコールバックイベントが発生する場合があるため、GPIOコールバックイベントをスタックさせないために、
+    GPIOコールバックイベントからパルス安定待ち時間を更新するだけの機能を持つ
+    そのため、パルスイベント処理はスレッド処理にしてある
+    '''
+
+    gpio_no = None
+
+    def __init__(self, group=None, target=None, name=None,
+                 args=(), kwargs=None, verbose=None):
+        threading.Thread.__init__(self, group=group, target=target, name=name,
+                                  verbose=verbose)
+        self.lock = threading.Lock()
+        self.updateWaitTime(args) # ここでは処理していない
+        self.gpio_no = kwargs[0]
+        return
+
+    def updateWaitTime(self, wait_time):
+        '''
+        パルス安定待ち時間を更新する
+        args:
+            wait_time: 現在時間に追加する待ち時間(秒)
+        return:
+            : None
+        '''
+        logging.debug('Waiting for lock')
+        with self.lock:
+            self.wait_time = wait_time
+            # スレッド実行中ならend_timeを延長する
+            if self.isAlive():
+                self.end_time = time.time() + wait_time
+        return
+
+    def getEndTime(self):
+        '''
+        パルス安定待ち時間を取得する
+        args:
+        return:
+            end_time: パルス安定待ちの終了時間
+        '''
+        with self.lock:
+            return self.end_time
+
+    def run(self):
+        '''
+        GPIO_NOの値変化はサージ電流によるブレが生じるため、3pinすべての状態を確認する
+        パルスイベント発生後、ノイズが収まるまでPULSE_WAIT_TIME秒待ってから3pinの最新値を確認する
+        '''
+        global gpio_latest_value1
+        global gpio_latest_value2
+        global gpio_latest_value3
+
+        logging.debug("---------- pulse start ----------")
+        # 処理開始時の各GPIO値はgpio_latest_valueに記録してある
+
+        ########################################
+        # パルス安定待ち
+        ########################################
+        # スレッド開始時にend_timeを設定する
+        self.end_time = time.time() + self.wait_time
+        while self.getEndTime() >= time.time():
+            logging.debug('waiting')
+            time.sleep(0.5)
+        logging.debug("---------- pulse end ----------")
+        ########################################
+        # パルス安定 処理開始
+        ########################################
+        while True:
+            gpio_end_value1 = GPIO.input(FaboGPIO.N_REST)
+            gpio_end_value2 = GPIO.input(FaboGPIO.DHCP_PIN)
+            gpio_end_value3 = GPIO.input(FaboGPIO.AP_PIN)
+            logging.debug("---------- switch start ----------")
+            # N-RESETにピンが刺さっていなければ、デフォルト設定に戻す
+            if gpio_end_value1 == 0:
+                os.system('/opt/fabo/bin/wifi_switch --print-config > /opt/fabo/conf/wifi_switch.conf')
+            if (gpio_latest_value2 != gpio_end_value2) and (gpio_end_value2 == 1):
+                os.system('/opt/fabo/bin/wifi_switch --mode dhcp')
+            elif (gpio_latest_value3 != gpio_end_value3) and (gpio_end_value3 == 1):
+                os.system('/opt/fabo/bin/wifi_switch --mode ap')
+            else:
+                logging.debug('nothing')
+
+            logging.debug("---------- switch end ----------")
+            gpio_latest_value1 = GPIO.input(FaboGPIO.N_REST)
+            gpio_latest_value2 = GPIO.input(FaboGPIO.DHCP_PIN)
+            gpio_latest_value3 = GPIO.input(FaboGPIO.AP_PIN)
+
+            if (not gpio_end_value1 == gpio_latest_value1) or (not gpio_end_value2 == gpio_latest_value2) or (not gpio_end_value3 == gpio_latest_value3):
+                # 処理前後でスイッチ値が不一致なのでリトライする
+                logging.debug("retry")
+            else:
+                logging.debug(str(FaboGPIO.N_REST)+":"+str(gpio_latest_value1)+" "+str(FaboGPIO.DHCP_PIN)+":"+str(gpio_latest_value2)+" "+str(FaboGPIO.AP_PIN)+":"+str(gpio_latest_value3))
+                break
+        #
+
+
+        logging.debug('end')
+        return
+#
+
+
+def wifiSwitchCallback(gpio_no):
+    '''
+    GPIOコールバックイベント処理
+    コールバック設定したGPIO_NOの値に変化があると、ここが実行される
+    args:
+        gpio_no: 反応したGPIO_NO
+    return:
+        : None
+    '''
+    global PULSE_WAIT_TIME
+
+    logging.debug('start wifiSwitchCallback')
+
+    if not 'pulse_work_thread' in globals():
+        global pulse_work_thread
+        pulse_work_thread = PulseWorkThread(kwargs=[gpio_no])
+        pulse_work_thread.updateWaitTime(PULSE_WAIT_TIME)
+        pulse_work_thread.start()
+    elif not pulse_work_thread.isAlive():
+        logging.debug("t cleate")
+        pulse_work_thread = PulseWorkThread(kwargs=[gpio_no])
+        pulse_work_thread.updateWaitTime(PULSE_WAIT_TIME)
+        pulse_work_thread.start()
+    else:
+        # パルスイベント処理中にGPIOコールバックイベントが来た場合は、処理中のパルス安定待ち時間を更新する
+        logging.debug("t Alive")
+        pulse_work_thread.updateWaitTime(PULSE_WAIT_TIME)
+    #
+
+    return
+#
+
+
+def processWifiSwitch():
+    '''
+    メインプロセス
+    起動時init()を実行し、GPIOスイッチの値を読み込み反映する
+    '''
+    tag='processWifiSwitch'
+    logging.debug("enter "+tag)
+
+    init()
+
+    SHARED_VARIABLE['is_process_wifi_switch_running']=True
+
+    # GPIO指定をFaboGPIOで行う
+    GPIO.setmode(GPIO.BCM) # GPIO番号指定
+    GPIO.setup(FaboGPIO.N_REST, GPIO.IN)
+    GPIO.setup(FaboGPIO.DHCP_PIN, GPIO.IN)
+    GPIO.setup(FaboGPIO.AP_PIN, GPIO.IN)
+
+    # エッジ検出イベントの取得
+    # イベントの通知登録
+    # 激打すると稀にオンオンやオフオフとなることがあるが、おそらくイベント検出がスキップされている
+    GPIO.add_event_detect(FaboGPIO.N_REST, GPIO.RISING, callback=wifiSwitchCallback, bouncetime=500)
+    GPIO.add_event_detect(FaboGPIO.DHCP_PIN, GPIO.RISING, callback=wifiSwitchCallback, bouncetime=50)
+    GPIO.add_event_detect(FaboGPIO.AP_PIN, GPIO.RISING, callback=wifiSwitchCallback, bouncetime=50)
+
+
+    while SHARED_VARIABLE['is_process_wifi_switch_running']:
+        #logging.debug("waiting for end")
+        time.sleep(1e+6) # コールバックは別スレッドで実行されるため、メインスレッドを終わらせないようにする。
+
+
+    # イベント検知の解除
+    GPIO.remove_event_detect(FaboGPIO.N_REST)
+    GPIO.remove_event_detect(FaboGPIO.DHCP_PIN)
+    GPIO.remove_event_detect(FaboGPIO.AP_PIN)
+    # 終了処理
+    GPIO.cleanup(FaboGPIO.N_REST)
+    GPIO.cleanup(FaboGPIO.DHCP_PIN)
+    GPIO.cleanup(FaboGPIO.AP_PIN)
+    return
+
+
+# プロセスで実行する関数リスト
+PROCESS_LIST=['processWifiSwitch']
+def doProcess(target):
+    '''
+    プロセスによる実行関数の振り分け定義
+    args:
+        target: プロセス名
+    return:
+        : 文字列 or None
+    '''
+    if target == 'processWifiSwitch':
+        processWifiSwitch()
+        return "end processWifiSwitch"
+
+def startManager():
+    m = SyncManager()
+    m.start()
+    return m
+
+mg = startManager()
+SHARED_VARIABLE=dict()
+SHARED_VARIABLE['is_process_wifi_switch_running']=False
+
+
+def init():
+    '''
+    スイッチ状態を反映する
+    起動時に一度実行する
+    '''
+    global gpio_latest_value1
+    global gpio_latest_value2
+    global gpio_latest_value3
+
+    # GPIO指定をFaboGPIOで行う
+    GPIO.setmode(GPIO.BCM)   # GPIO番号指定
+    GPIO.setup(FaboGPIO.N_REST, GPIO.IN)
+    GPIO.setup(FaboGPIO.DHCP_PIN, GPIO.IN)
+    GPIO.setup(FaboGPIO.AP_PIN, GPIO.IN)
+
+    # 初期値を記録する
+    gpio_latest_value1 = GPIO.input(FaboGPIO.N_REST)
+    gpio_latest_value2 = GPIO.input(FaboGPIO.DHCP_PIN)
+    gpio_latest_value3 = GPIO.input(FaboGPIO.AP_PIN)
+    logging.debug("---------- switch start ----------")
+    if GPIO.input(FaboGPIO.N_REST) == 0:
+        os.system('/opt/fabo/bin/wifi_switch --print-config > /opt/fabo/conf/wifi_switch.conf')
+    if GPIO.input(FaboGPIO.DHCP_PIN) == 1:
+        os.system('/opt/fabo/bin/wifi_switch --mode dhcp')
+    elif GPIO.input(FaboGPIO.AP_PIN) == 1:
+        os.system('/opt/fabo/bin/wifi_switch --mode ap')
+    else:
+        logging.debug('nothing')
+    logging.debug("---------- switch end ----------")
+    # 終了処理
+    GPIO.cleanup(FaboGPIO.N_REST)
+    GPIO.cleanup(FaboGPIO.DHCP_PIN)
+    GPIO.cleanup(FaboGPIO.AP_PIN)
+    return
+
+
+def main():
+    '''
+    processWifiSwitch()を別プロセスとして起動する
+    '''
+    logging.debug("start main")
+    init()
+    try:
+        with futures.ProcessPoolExecutor(max_workers=len(PROCESS_LIST)) as executer:
+            mappings = {executer.submit(doProcess, pname): pname for pname in PROCESS_LIST}
+            for i in futures.as_completed(mappings):
+                target = mappings[i]
+                result = i.result()
+                logging.debug(result)
+
+    except Exception as e:
+        logging.debug('error! executer failed.')
+        logging.debug(str(e))
+    finally:
+        logging.debug("executer end")
+
+    return
+
+
+
+if __name__ == '__main__':
+    main()
